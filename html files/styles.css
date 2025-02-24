@@ -1,0 +1,102 @@
+/* Reset básico para remoção de margens/paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página geral */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff6f61, #ffb95e);
+    color: #333;
+    text-align: center;
+}
+
+/* Container centralizado */
+.center {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8); /* Fundo branco translúcido */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Título principal das páginas */
+h1 {
+    font-size: 2rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Estilo dos botões de portes */
+a.door {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+a.door:hover {
+    background-color: #45a049; /* Verde mais escuro ao passar o mouse */
+    transform: scale(1.1); /* Botão cresce suavemente ao hover */
+}
+
+/* Layout flexível para as portas */
+.doors {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 20px 40px; /* Tamanho do botão */
+    font-size: 1.5rem; /* Tamanho da fonte */
+    font-weight: bold;
+    color: white ;
+    text-transform: uppercase; /* Letras maiúsculas */
+    text-decoration: none;
+    background: linear-gradient(45deg, #C77FDF , #63009C ); /* Gradiente moderno */
+    border: none;
+    border-radius: 50px; /* Bordas arredondadas */
+    position: relative;
+    overflow: hidden; /* Garantir que os efeitos fiquem dentro das bordas */
+    z-index: 1;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25); /* Sombra elegante */
+    transition: all 0.4s ease; /* Suavidade nas transições */
+}
+
+.btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Efeito de iluminação */
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.btn:hover {
+    transform: translateY(-5px); /* Botão sobe levemente no hover */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+    background: linear-gradient(45deg, #63009C, #45a049); /* Gradiente inverte */
+}
+
+.btn:active {
+    transform: scale(100.95); /* Botão "encolhe" ao clicar */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
