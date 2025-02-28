@@ -1,102 +1,193 @@
-/* Reset básico para remoção de margens/paddings */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@property --rotate {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
 }
 
-/* Corpo da página geral */
-body {
-    font-family: Arial, sans-serif;
+@keyframes spin {
+    0% {
+        --rotate: 0deg;
+    }
+    100% {
+        --rotate: 360deg;
+    }
+}
+
+@keyframes gradient-slide {
+    0% {
+        background-position: 0% 50%; /* Gradiente na posição inicial (esquerda) */
+    }
+    100% {
+        background-position: 100% 50%; /* Gradiente na posição final (direita) */
+    }
+}
+
+
+
+:root{
+    --btn-h: 12vh;
+    --bth-w: calc(var(--btn-h) * 0.6);
+}
+
+body{
+    min-height: 100vh;
+    background: #212534;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff6f61, #ffb95e);
-    color: #333;
-    text-align: center;
-}
-
-/* Container centralizado */
-.center {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.8); /* Fundo branco translúcido */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Título principal das páginas */
-h1 {
-    font-size: 2rem;
-    color: #444;
-    margin-bottom: 20px;
-}
-
-/* Estilo dos botões de portes */
-a.door {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 10px;
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-a.door:hover {
-    background-color: #45a049; /* Verde mais escuro ao passar o mouse */
-    transform: scale(1.1); /* Botão cresce suavemente ao hover */
-}
-
-/* Layout flexível para as portas */
-.doors {
-    display: flex;
     justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 2rem;
+
 }
 
-.btn {
-    display: inline-block;
-    padding: 20px 40px; /* Tamanho do botão */
-    font-size: 1.5rem; /* Tamanho da fonte */
-    font-weight: bold;
-    color: white ;
-    text-transform: uppercase; /* Letras maiúsculas */
-    text-decoration: none;
-    background: linear-gradient(45deg, #C77FDF , #63009C ); /* Gradiente moderno */
-    border: none;
-    border-radius: 50px; /* Bordas arredondadas */
+.btn{
+    padding: 1px 5px;
+    background: #191c29;
+    height: calc(var(--btn-h)*.4);
+    width: calc(var(--bth-w)*.8);
+    color: rgb(88 199 250 / 100%);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
     position: relative;
-    overflow: hidden; /* Garantir que os efeitos fiquem dentro das bordas */
-    z-index: 1;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25); /* Sombra elegante */
-    transition: all 0.4s ease; /* Suavidade nas transições */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
 }
 
-.btn:before {
+.btn::before{
     content: '';
+    width: 114%; /* Aumenta levemente a largura */
+    height: 110%; /* Aumenta levemente a altura */
+    background-image: linear-gradient(
+        var(--rotate), deeppink, deepskyblue 43%, whitesmoke) ;
+    border-radius: 8px; /* Levemente maior que o botão */
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
+    top: -5%; /* Reposiciona 3px acima */
+    left: -7%; /* Reposiciona 3px à esquerda */
+    z-index: -1; /* Fica atrás do botão principal */
+    animation: spin 1.8s linear infinite;
+}
+
+.btn::after{
+    position: absolute;
+    content: '';
+    width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2); /* Efeito de iluminação */
-    transition: width 0.4s ease;
+    background-image: linear-gradient(
+            var(--rotate), deeppink, deepskyblue 43%, whitesmoke) ;
+    left: 0;
+    top: calc(var(--btn-h)/8);
     z-index: -1;
+    margin: 0 auto;
+    transform: scale(0.8);
+    filter: blur(calc(var(--btn-h)/3));
+    opacity: 1;
+    transition: opacity 0.5s;
+    animation: spin 1.8s linear infinite;
 }
 
-.btn:hover {
-    transform: translateY(-5px); /* Botão sobe levemente no hover */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
-    background: linear-gradient(45deg, #63009C, #45a049); /* Gradiente inverte */
+.btn:hover::after, .btn:hover::before{
+    opacity: 0;
+    animation: none;
 }
 
-.btn:active {
-    transform: scale(100.95); /* Botão "encolhe" ao clicar */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+.btn:hover{
+    color: rbg(88 199 250 / 100%);
+    transition: color 1s;
+}
+
+.center {
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: column; /* Deixa o <h1> em cima das "doors" */
+    align-items: center; /* Centraliza o <h1> e as "doors" horizontalmente */
+    justify-content: center; /* Centraliza tudo verticalmente */
+    gap: 1rem; /* Espaço entre o título e as portas */
+    height: 65vh; /* Faz o container ocupar toda a altura da tela */
+}
+
+.center h1 {
+    font: bold 3rem cursive;
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(to right, gray, deeppink 43%, whitesmoke);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Define o texto como transparente */
+    animation: gradient-slide 3s ease-in-out infinite alternate;
+    background-size: 200%; /* Faz o gradiente se mover dentro do texto */
+}
+
+
+
+
+
+.doors {
+    display: flex; /* Alinha os itens em uma linha */
+    gap: 4rem; /* Adiciona espaçamento entre os botões */
+    justify-content: center;
+    margin-top: 2rem; /* Adiciona espaço acima da seção */
+}
+
+
+.door {
+    padding: 1px 5px;
+    background: #191c29;
+    height: calc(var(--btn-h)*2);
+    width: calc(var(--bth-w)*2);
+    color: rgb(88 199 250 / 100%);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+}
+
+.door::before {
+    content: '';
+    width: 114%;
+    height: 110%;
+    background-image: linear-gradient(
+            var(--rotate), deeppink, deepskyblue 43%, whitesmoke);
+    border-radius: 8px;
+    position: absolute;
+    top: -5%;
+    left: -7%;
+    z-index: -1;
+    animation: spin 1.8s linear infinite;
+}
+
+.door::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+            var(--rotate), deeppink, deepskyblue 43%, whitesmoke);
+    left: 0;
+    top: calc(var(--btn-h)/8);
+    z-index: -1;
+    margin: 0 auto;
+    transform: scale(0.8);
+    filter: blur(calc(var(--btn-h)/3));
+    opacity: 1;
+    transition: opacity 0.5s;
+    animation: spin 1.8s linear infinite;
+}
+
+.door:hover::after,
+.door:hover::before {
+    opacity: 0;
+    animation: none;
+}
+
+.door:hover {
+    color: rgb(88 199 250 / 100%);
+    transition: color 1s;
 }
