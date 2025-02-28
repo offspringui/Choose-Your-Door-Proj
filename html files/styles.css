@@ -126,9 +126,10 @@ body{
 
 .doors {
     display: flex; /* Alinha os itens em uma linha */
-    gap: 4rem; /* Adiciona espaçamento entre os botões */
+    gap: 2rem; /* Adiciona espaçamento entre os botões */
     justify-content: center;
     margin-top: 2rem; /* Adiciona espaço acima da seção */
+    flex-wrap: wrap;
 }
 
 
